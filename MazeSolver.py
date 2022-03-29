@@ -13,18 +13,18 @@ BLOCK_SIZE = 64
 class MazeSolverGUI(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title("Maze Solver")
-        self.geometry("{0}x{1}".format(WIN_WIDTH, WIN_HEIGHT))
-        self.resizable(width=False, height=False)
-        self.option_add("*tearOff", tk.FALSE)
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(0, weight=1)
         self.maze_matrix = [
                 [1,1,1,2],
                 [0,1,0,1],
                 [0,1,0,1],
                 [3,1,1,1]
             ]
+        self.title("Maze Solver")
+        self.geometry("{0}x{1}".format(len(self.maze_matrix) * BLOCK_SIZE, len(self.maze_matrix) * BLOCK_SIZE))
+        self.resizable(width=False, height=False)
+        self.option_add("*tearOff", tk.FALSE)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
         self.sketch = GridMap.GridMap(self, len(self.maze_matrix) * BLOCK_SIZE, len(self.maze_matrix) * BLOCK_SIZE)
         self.sketch.grid(column=0, row=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         self.draw_maze()
